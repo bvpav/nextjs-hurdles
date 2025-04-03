@@ -1,8 +1,6 @@
 // Based on: https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image#generate-images-using-code-js-ts-tsx
 
 import { ImageResponse } from "next/og";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 
 // Image metadata
 export const alt = "About Acme";
@@ -13,16 +11,13 @@ export const size = {
 
 export const contentType = "image/png";
 
-export const runtime = "nodejs"; // Explicitly set
-
-// Font loading, process.cwd() is Next.js project directory
-const geistSemiBold = readFile(
-  join(process.cwd(), "src/assets/Geist-SemiBold.ttf")
-);
+export const runtime = "edge"; // Explicitly set
 
 // Image generation
 export default async function Image() {
-  const geistSemiBoldData = await geistSemiBold;
+  const geistSemiBoldData = await fetch(
+    new URL("../assets/Geist-SemiBold.ttf", import.meta.url)
+  ).then((r) => r.arrayBuffer());
 
   return new ImageResponse(
     (
