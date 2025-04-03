@@ -16,7 +16,7 @@ export const contentType = "image/png";
 export const runtime = "nodejs"; // Explicitly set
 
 // Font loading, process.cwd() is Next.js project directory
-const geistSemiBold = await readFile(
+const geistSemiBold = readFile(
   join(process.cwd(), "src/assets/Geist-SemiBold.ttf")
 );
 
