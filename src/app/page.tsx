@@ -1,5 +1,12 @@
+import { Metadata } from "next";
+
 export const revalidate = 0;
 export const runtime = "edge";
+
+export const metadata = {
+  title: "Static Things",
+  description: "A list of static things (shuffled on every page load)",
+} satisfies Metadata;
 
 const staticThings = [
   "Static Thing 1",
